@@ -24,4 +24,6 @@ program p7e2
     deallocate(res)
 
 
+    
+
 end program 
