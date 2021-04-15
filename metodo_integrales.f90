@@ -50,7 +50,7 @@ subroutine simpson(a, b, N, integ)
     h=(b-a)/(N-1) 
     sum=0 
 
-    do i=1, N 
+    do i=2, N  !esta suma no deme incluir los valores extremos (los agrego a mano despues)
         x=a+(i-1)*h 
         if(mod(i,2)==0)then 
             sum=sum+2.0*f(x)
