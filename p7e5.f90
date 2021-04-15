@@ -10,10 +10,10 @@ program p7e5
     y(2)=150.0 
     write(*,*)"ingrese n"
     read(*,*)n 
-    allocate(res(n+1,2))
+    allocate(res(n+2,2))
     call dif_finitas_cte(x, y, n, res)
-    open(unit=10,file="resulp7e5_2.txt")
-    do i=1,n+1
+    open(unit=10,file="resulp7e5.dat")
+    do i=1,n+2
     write(10,*)res(i,:)
     enddo
     close(10)

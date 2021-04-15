@@ -93,7 +93,7 @@ contains
         real(8), dimension(n) :: b, y_res 
         real(8) :: diag
         h=(x(2)-x(1))/real(n+1) 
-        Q=0.15 !varia en todos los ejercicios (debería darlo por argumento)
+        Q=-0.15 !varia en todos los ejercicios (debería darlo por argumento)
 
         !armo la matriz a tridiagonal 
         diag=Q*h*h-2.0
@@ -105,18 +105,12 @@ contains
         !pongo los valores de la diagonal 
         do i=1, n 
             A(i,i)=diag 
+            if(i>1) A(i-1,i)=1.0 
+            
+            if(i<n) A(i+1,i)=1.0
         enddo 
         !armo las otras diagonales 
-        do i=2, n-1 !varia las filas
-            do j=2,n-1 !varia las columnas
-                if(j/=i)cycle 
-                A(i,j-1)=1.0 
-                A(i,j+1)=1.0
-            enddo 
-        enddo 
-        !pongo manualmente el primero y el último 
-        A(1,2)=1
-        A(n,n-1)=1 
+         
         do i=1, n 
             write(*,*)A(i,:)
         enddo 
@@ -145,6 +139,8 @@ contains
         !armo la matriz resultados 
         res(1,1)=x(1)
         res(1,2)=y(1)
+        res(n+2,1)=x(2)
+        res(n+2,2)=y(2)
      
         
        

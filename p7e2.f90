@@ -17,7 +17,7 @@ program p7e2
     open(unit=12,file="resulp7e2.dat", status="old")
    do i=1, n+1 
         write(*,*)res(i,:)
-        write(12,*)res(i,:)
+        write(12,*)res(i,1), res(i,2) !que solo me ponga la evolución de la temperatura
 
    enddo 
    close(12)
