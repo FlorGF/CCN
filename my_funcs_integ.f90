@@ -15,10 +15,10 @@ module my_funcs_integ
         !f=sin(exp(x))
 
         !ejercicio 6 practica 6
-        !f=cos(x)
+        f=cos(x)
 
         !ejercicio 8 practica 6, masa 
-        f=1.0 
+        !f=1.0 
 
 
 

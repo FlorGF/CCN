@@ -1,5 +1,5 @@
 module metodo_integrales
-    use my_funcs_integ
+ use my_funcs_integ
     implicit none 
 contains
 !---------------------------------------------------
@@ -133,6 +133,8 @@ SUBROUTINE spline(x, y, n, yp1, ypn, y2)
         RETURN
     END SUBROUTINE spline
 
+!---------------------------------------------------------------------------------------
+  
 
 
 
