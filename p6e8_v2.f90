@@ -4,7 +4,7 @@ program p6e8
     integer :: N 
     a=-25.0 
     b=25.0 
-    N=51 
+    N=1001 
     call simpson(a, b, N, integ)
     write(*,*)"El valor de la inercia es", integ 
 
@@ -30,7 +30,7 @@ subroutine simpson(a, b, N, integ)
     h=(b-a)/(N-1) 
     sum=0 
 
-    do i=2, N  !esta suma no deme incluir los valores extremos (los agrego a mano despues)
+    do i=2, N-1  !esta suma no deme incluir los valores extremos (los agrego a mano despues)
         y=a+(i-1)*h 
         if(mod(i,2)==0)then 
             sum=sum+2.0*f(y)
@@ -40,6 +40,7 @@ subroutine simpson(a, b, N, integ)
        ! write(*,*)"sum=", sum 
     enddo 
     sum=sum+f(a)+f(b)
+    !write(*,*)f(a), f(b) 
     integ=sum*h/3.0 
 
 end subroutine 
@@ -51,12 +52,13 @@ function f(y) !esta función es la que queda cuando se integra en x
     real(8) :: a, b, sum, h, x  !extremos de la integral interna 
     integer :: N, i 
     real(8) :: g 
-    N=51
+    N=1001
     a=-sqrt(25**2-y**2) !calculo los extremos de la integral 
     b=sqrt(25**2-y**2)
     h=(b-a)/real(N-1)
+    sum=0
     !hago metodo de simpson
-    do i=2, N  
+    do i=2, N-1  
         x=a+(i-1)*h 
         if(mod(i,2)==0)then 
             sum=sum+2.0*g(x,y)
@@ -74,7 +76,7 @@ function g(x,y)
     real(8), intent(in) :: x , y 
     real(8) :: g 
     !la función g va a ser la función que estamos integrando 
-    !g=180.0 !para la masa 
-    g=180.0*(x**2+y**2)!para la inercia 
+    g=1.0 !para la masa 
+    !g=180.0*(x**2+y**2)!para la inercia 
 end function 
 

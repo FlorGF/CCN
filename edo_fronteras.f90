@@ -186,8 +186,71 @@ contains
         Ainv=Aamp(:,n+1:2*n)
         end subroutine 
 
+subroutine dif_finitas_gral(x_ext, y_ext, n, res)
+    real(8), dimension(2) :: x_ext, y_ext !x e y igual que en el ejercicio anterior
+    real(8), dimension(n+2,2) :: res
+    integer :: n, i 
+    real(8) :: h 
+    real(8), dimension(n,n) :: A, Ainv
+    real(8), dimension(n) :: b, y_res, x 
+    !paso h
+    h=(x_ext(2)-x_ext(1))/real(n+1) 
+    !armo el vector x 
+    do i=1, n 
+        x(i)=x_ext(1)+i*h 
+    enddo 
 
+    !armo la matriz A
+    do i=1, n 
+        A(i,:)=0 
+    enddo 
+    
+    do i=1, n 
+        A(i,i)=q(x(i))*h*h-2
+        if(i>1) A(i-1,i)=1.0-p(x(i))*h/2
+        
+        if(i<n) A(i+1,i)=1.0+p(x(i))*h/2
+    enddo 
 
+    !armo el vector columna b 
+    do i=2, n-1 
+        b(i)=h*h*f(x(i))
+    enddo 
+    b(1)=-y_ext(1)*(1-p(x(1))*h/2)+h*h*f(x(1))
+    b(n)=-y_ext(2)*(1+p(x(n))*h/2)+h*h*f(x(n))
 
+    !calculo la inversa de A 
+    call inversa(A,Ainv)
 
+    !calculo los resultados 
+    y_res=matmul(Ainv,b)
+
+     !armo la matriz resultados 
+    res(1,1)=x_ext(1)
+    res(1,2)=y_ext(1)
+    res(n+2,1)=x_ext(2)
+    res(n+2,2)=y_ext(2)
+    do i=1, n 
+        res(i+1,1)=x(i)
+        res(i+1,2)=y_res(i)
+    enddo 
+
+end subroutine 
+
+!hay que definir las funciones del metodo de dif finitas 
+function f(x)
+    real(8) :: f 
+    real(8), intent(in) :: x 
+    f=x+3 
+end function 
+function p(x)
+    real(8) :: p 
+    real(8), intent(in) :: x 
+    p=x*x 
+end function 
+function q(x)
+    real(8) :: q 
+    real(8), intent(in) :: x 
+    q=-2*x
+end function 
 end module 

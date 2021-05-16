@@ -24,13 +24,7 @@ module my_funcs_integ
 
     end function
 
-    function g(x)
-    real(8), dimension(2) :: g 
-    real(8), intent(in) :: x
-    g(2)=sqrt(25**2-x**2)
-    g(1)=-sqrt(25**2-x**2)
-
-    end function 
+  
 
 
 
