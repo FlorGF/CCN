@@ -23,7 +23,8 @@ program p7e2
    close(12)
     deallocate(res)
 
-
+!-----------------------------------------------------------------------------
+    !ejercicio 3, hay que encontrar el cero de T' (la derivada de T)
     
 
 end program 

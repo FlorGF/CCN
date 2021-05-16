@@ -40,6 +40,7 @@ contains
         !ahora calculo con regresión lineal el valor de la condición inicial que tendría que tener la derivada primera en el extremo
         !inferior para que me de la condicion en el extremo mayor 
         !y0=(yp(2)-yp(1))*(y(2)-yp(1))/(b-a)+a  (mio)
+        !esto funciona solo para cuando es lineal OJO CON ESTO, sino hay que encontrar y0 con ecuaciones de raices  
         y0=((Yp(2)-Yp(1))/(b-a))*(Y(2)-a)+Yp(1) !de ramiro
         
 
@@ -195,11 +196,12 @@ subroutine dif_finitas_gral(x_ext, y_ext, n, res)
     real(8), dimension(n) :: b, y_res, x 
     !paso h
     h=(x_ext(2)-x_ext(1))/real(n+1) 
+    write(*,*)h, "esto es h"
     !armo el vector x 
     do i=1, n 
         x(i)=x_ext(1)+i*h 
     enddo 
-
+    !write(*,*)"esto es x", x 
     !armo la matriz A
     do i=1, n 
         A(i,:)=0 
@@ -211,11 +213,12 @@ subroutine dif_finitas_gral(x_ext, y_ext, n, res)
         
         if(i<n) A(i+1,i)=1.0+p(x(i))*h/2
     enddo 
-
+    
     !armo el vector columna b 
     do i=2, n-1 
         b(i)=h*h*f(x(i))
     enddo 
+    !write(*,*)"esto es b", b 
     b(1)=-y_ext(1)*(1-p(x(1))*h/2)+h*h*f(x(1))
     b(n)=-y_ext(2)*(1+p(x(n))*h/2)+h*h*f(x(n))
 
