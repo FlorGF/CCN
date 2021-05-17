@@ -69,7 +69,7 @@ subroutine splines_integ(a, b, N, integ)
     real(8) :: a, b, integ, h
     integer :: N , i
     real(8), dimension(n) :: x, y, y2 !y2 es la derivada segunda de la función 
-    real(8) :: yp1, ypn !estos son datos para la subrutina de splines
+    real(8) :: yp1, ypn !estos son datos para la subrutina de splines (el valor de la derivada primera)
     h=(b-a)/(n-1) 
 
     !armo los arreglos x e y 
@@ -79,13 +79,13 @@ subroutine splines_integ(a, b, N, integ)
     enddo 
     
     yp1=f(x(1))
-    ypn=f(x(n))
+    ypn=f(x(n)) !estos pueden ser datos, por qué las calcule así? 
 
-    !ahora llamo a splines para calcular y2
+    !ahora llamo a splines para calcular y2 (los valores de la derivada segunda en f(xi))
     call spline(x, y, n, yp1, ypn, y2)
 
     integ=0.0 
-    !esta es la fórmula final para encontrar la integral 
+    !esta es la fórmula final para encontrar la integral (está escrita en la práctica)
     DO i=1, n-1
         integ=integ+ &
         (x(i+1)-x(i))/2._8* &
