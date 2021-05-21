@@ -13,8 +13,12 @@ real(8), dimension(2) :: deriv
 !deriv(1)=y(2)
 !deriv(2)=x+3.0+2.0*x*y(2)-y(1)*x**2
 !problema uno final 26/2/2021
+!deriv(1)=y(2)
+!deriv(2)=0.2*x*x-3*sqrt(x)
+
+!PROBLEMA 2 FINAL 28/12/2020
 deriv(1)=y(2)
-deriv(2)=0.2*x*x-3*sqrt(x)
+deriv(2)=-2*y(2)/x+2*y(1)/x**2+sin(log(x))/x**2
 end function
 !problema 7 
 
