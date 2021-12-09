@@ -56,6 +56,8 @@ module fitting
         enddo 
         !write(*,*)"z igual"
         !write(*,*)z 
+
+        
         !stop 
 
         do i=1, n_dat 
