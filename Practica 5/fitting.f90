@@ -55,6 +55,7 @@ module fitting
             z(i,:)=jacobiano(x(i),a_sem,n_param)
         enddo 
         !write(*,*)"z igual"
+        
         !write(*,*)z 
 
         
